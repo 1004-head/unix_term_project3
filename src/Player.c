@@ -47,6 +47,7 @@ void checkCommand(char** command){
         case move:
             break;
         case play:
+            print();
             break;
         case clear:
             break;
