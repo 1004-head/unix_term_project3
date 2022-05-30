@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "linkedlist.h"
 
 static Node* _head = NULL;
@@ -21,14 +25,27 @@ void print(){
     printf("%s is now playing!\n", _cur_node->data);
 }
 
-void print_file(FILE* stream);
+void print_file(FILE* stream)
+{	
+	Node* now = last_node();
+	char my_string[51];
+
+	sprintf(my_string, "%zd\n", size());
+	fputs(my_string, stream);
+
+	while (now->prev != NULL){
+		fputs(now->data, stream);
+		fputs("\n", stream);
+		now = now->prev;
+	}
+}
 
 // free 아직 안넣음
 void clear(){
     if (!empty()){
         Node* now = _head->next;
         Node* next;
-        while (now != NULL){
+        while (now->next != NULL){
             next = now->next;
             delete_node(now);
             now = next;
@@ -37,22 +54,22 @@ void clear(){
     printf("LinkedList is cleared!\n");
 }
 
-Node* append_left(size_t n, char new_data[n]){
-    Node* new = (Node*)malloc(sizeof(Node));
-    strcpy(new->data, new_data);
+Node* append_left(size_t n, char new_data[]){
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    strcpy(new_node->data, new_data);
 
-    new->next = _head->next;
-    _head->next->prev = new;
+    new_node->next = _head->next;
+    _head->next->prev = new_node;
 
-    _head->next = new;
-    new->prev = _head;
+    _head->next = new_node;
+    new_node->prev = _head;
 
     if (empty()){
-        _cur_node = new;
+        _cur_node = new_node;
     }
     _size++;
 
-    return new;
+    return new_node;
 }
 
 // move
@@ -69,22 +86,22 @@ Node* insert_after(Node* cur_node, Node* new_node){
     return new_node;
 }
 
-Node* append(size_t n, char new_data[n]){
-    Node* new = (Node*)malloc(sizeof(Node));
-    strcpy(new->data, new_data);
+Node* append(size_t n, char new_data[]){
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    strcpy(new_node->data, new_data);
 
-    new->next = _tail;
-    _tail->prev->next = new;
+    new_node->next = _tail;
+    _tail->prev->next = new_node;
 
-    new->prev = _tail->prev;
-    _tail->prev = new;
+    new_node->prev = _tail->prev;
+    _tail->prev = new_node;
 
     if (empty()){
-        _cur_node = new;
+        _cur_node = new_node;
     }
     _size++;
 
-    return new;
+    return new_node;
 }
 
 // 노드 삭제 시, cur_node를 우선적으로 앞으로 이동함.
@@ -93,26 +110,29 @@ Node* append(size_t n, char new_data[n]){
 Node* delete_node(Node* cur_node){
     // 여기에 들어오면 무조건 매칭되는 값이 있다는 의미
     // 따라서 그 검사는 하지 않겠음.
+    // 테스트 케이스 보고 참고
     _size--;
     if(empty()){
         _cur_node = NULL;
+        return NULL;
     } 
-    else if (_cur_node -> prev == NULL){
-        _cur_node = _cur_node->next;
-    }
-    else{
-        _cur_node = _cur_node->prev;
-    }
+    else if (_cur_node == cur_node)
+        if (cur_node -> next == NULL){
+            _cur_node = _cur_node->next;
+        }
+        else{
+            _cur_node = _cur_node->prev;
+        }
 
-    _cur_node->prev->next = _cur_node->next;
-    _cur_node->next->prev = _cur_node->prev;
+    cur_node->prev->next = cur_node->next;
+    cur_node->next->prev = cur_node->prev;
 
-    return _cur_node;
+    return cur_node;
 }
 
-Node* delete(char* data){
+Node* delete_by_data(char* data){
     Node* now = _head;
-    while (now != NULL){
+    while (now->next != NULL){
         if (strcmp(data, now->data) == 0){
             return delete_node(now);
         }
@@ -133,11 +153,13 @@ Node* get_node(size_t index){
     return now;
 }
 
-Node* first(){
+Node* first_node(){
+    if (empty()) return _tail;
     return _head->next;
 }
 
-Node* last(){
+Node* last_node(){
+    if (empty()) return _head;
     return _tail->prev;
 }
 
