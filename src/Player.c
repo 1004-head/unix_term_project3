@@ -26,6 +26,9 @@ void checkCommand(char** command){
             append_left(sizeof(title), title);
             break;
         case del:
+            char *title = malloc(sizeof(command[1]));
+            title = command[1];
+            delete(title);
             break;
         case list:
             printf("LinkedList [ ");
