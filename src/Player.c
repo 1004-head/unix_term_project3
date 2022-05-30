@@ -1,5 +1,8 @@
-#include "include/linkedlist.h"
-#include "include/textfilewriter.h"
+#include <stdio.h>
+#include <string.h>
+
+#include "linkedlist.h"
+#include "textfilewriter.h"
 
 enum Command{
     add,
@@ -33,6 +36,7 @@ void checkCommand(char** command){
             printf("%s ]", node->date);
             break;
         case next:
+            next();
             break;
         case prev:
             break;
