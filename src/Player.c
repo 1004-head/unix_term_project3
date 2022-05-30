@@ -39,6 +39,7 @@ void checkCommand(char** command){
             next();
             break;
         case prev:
+            prev();
             break;
         case move:
             break;
