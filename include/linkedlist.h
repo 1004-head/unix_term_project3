@@ -24,4 +24,6 @@ Node* last_node();
 Node* next();
 Node* prev();
 
+void init_state();
+void print_all();
 #endif //LINKEDLIST_LINKEDLIST_H
