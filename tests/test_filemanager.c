@@ -34,10 +34,13 @@ TEST(TestFileReaderTest, WriteTextFile) {
     }
 
     fclose(file);
-    
+
     EXPECT_EQ(NUM_OF_MUSIC, 2);
     EXPECT_STREQ(music_titles[0], "Hello");
     EXPECT_STREQ(music_titles[1], "Enemy");
+
+    GTEST_SKIP() << NUM_OF_MUSIC << " " << music_titles[0] << " " << music_titles[1];
+    for (int i =0; i < NUM_OF_MUSIC; i++)
 
     //GTEST_SKIP() << NUM_OF_MUSIC << " " << music_titles[0] << " " << music_titles[1];
     for (int i =0; i < NUM_OF_MUSIC; i++) 
