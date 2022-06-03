@@ -45,6 +45,7 @@ void checkCommand(char** command){
             print();
             break;
         case clear:
+            clear();
             break;
         case quit:
             break;
