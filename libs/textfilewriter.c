@@ -14,7 +14,7 @@ void create_music_titles(FILE* stream){
 	
 	fscanf(stream,"%d", &num);
 
-	for (i; i < num; i++) {
+	for (; i < num; i++) {
 
 		char title[MAX_TITLE_SIZE];
 
