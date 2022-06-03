@@ -41,6 +41,9 @@ void checkCommand(char** command){
             prev();
             break;
         case move:
+            int moveNum = command[1]-0x30;
+            Node *new_node = get_node(moveNum);
+            //insert_after(??,new_node); 좀 더 알아보고 추가 구현
             break;
         case play:
             print();
