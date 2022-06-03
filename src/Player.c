@@ -31,12 +31,7 @@ void checkCommand(char** command){
             delete(title);
             break;
         case list:
-            printf("LinkedList [ ");
-            Node *node;
-            for(node=first();node==last();node=next()){
-                printf("%s ", node->data);
-            }
-            printf("%s ]", node->date);
+            print_all();
             break;
         case next:
             next();
