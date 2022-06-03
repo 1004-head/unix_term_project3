@@ -1,5 +1,9 @@
-#include "include/linkedlist.h"
-#include "include/textfilewriter.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "linkedlist.h"
+#include "textfilewriter.h"
 
 enum Command{
     add,
@@ -23,26 +27,34 @@ void checkCommand(char** command){
             append_left(sizeof(title), title);
             break;
         case del:
+            char *title = malloc(sizeof(command[1]));
+            title = command[1];
+            delete(title);
             break;
         case list:
-            printf("LinkedList [ ");
-            Node *node;
-            for(node=first();node==last();node=next()){
-                printf("%s ", node->data);
-            }
-            printf("%s ]", node->date);
+            print_all();
             break;
         case next:
+            next();
             break;
         case prev:
+            prev();
             break;
         case move:
+            int moveNum = command[1]-0x30;
+            Node *new_node = get_node(moveNum);
+            //insert_after(??,new_node); 좀 더 알아보고 추가 구현
             break;
         case play:
+            print();
             break;
         case clear:
+            clear();
             break;
         case quit:
+            clear();
+            printf("quit!");
+            exit(0);
             break;
         case load:
             char *fileName = command[1];
