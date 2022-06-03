@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "linkedlist.h"
 #include "textfilewriter.h"
@@ -48,6 +49,9 @@ void checkCommand(char** command){
             clear();
             break;
         case quit:
+            clear();
+            printf("quit!");
+            exit(0);
             break;
         case load:
             char *fileName = command[1];
