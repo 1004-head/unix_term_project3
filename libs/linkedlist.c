@@ -129,13 +129,14 @@ Node* delete_node(Node* cur_node){
     // 따라서 그 검사는 하지 않겠음.
     // 테스트 케이스 보고 참고
     _size--;
-    if (_cur_node == cur_node)
+    if (_cur_node == cur_node){
         if (cur_node -> next == NULL){
             _cur_node = _cur_node->next;
         }
         else{
             _cur_node = _cur_node->prev;
         }
+    }
 
     cur_node->prev->next = cur_node->next;
     cur_node->next->prev = cur_node->prev;

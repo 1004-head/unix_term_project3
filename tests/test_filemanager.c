@@ -13,7 +13,7 @@ TEST(TestFileWriterTest, WriteTextFile) {
     //GTEST_SKIP() << file_name;
 }
 
-TEST(TestFileReaderTest, WriteTextFile) {
+TEST(TestFileReaderTest, ReadTextFile) {
     //read_file("20220517.list");
     char *file_name = (char*)"20220517.list";
     int NUM_OF_MUSIC = 0;
@@ -38,9 +38,6 @@ TEST(TestFileReaderTest, WriteTextFile) {
     EXPECT_EQ(NUM_OF_MUSIC, 2);
     EXPECT_STREQ(music_titles[0], "Hello");
     EXPECT_STREQ(music_titles[1], "Enemy");
-
-    GTEST_SKIP() << NUM_OF_MUSIC << " " << music_titles[0] << " " << music_titles[1];
-    for (int i =0; i < NUM_OF_MUSIC; i++)
 
     //GTEST_SKIP() << NUM_OF_MUSIC << " " << music_titles[0] << " " << music_titles[1];
     for (int i =0; i < NUM_OF_MUSIC; i++) 
